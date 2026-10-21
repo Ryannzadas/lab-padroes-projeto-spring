@@ -4,21 +4,24 @@ import one.digitalinnovation.gof.model.Cliente;
 
 /**
  * Interface que define o padrão <b>Strategy</b> no domínio de cliente. Com
- * isso, se necessário, podemos ter multiplas implementações dessa mesma
+ * isso, se necessário, podemos ter múltiplas implementações dessa mesma
  * interface.
- * 
- * @author falvojr
+ *
+ * @author falvojr (versão original)
  */
 public interface ClienteService {
 
 	Iterable<Cliente> buscarTodos();
 
+	/** @throws one.digitalinnovation.gof.exception.ClienteNaoEncontradoException */
 	Cliente buscarPorId(Long id);
 
-	void inserir(Cliente cliente);
+	Cliente inserir(String nome, String cep);
 
-	void atualizar(Long id, Cliente cliente);
+	/** @throws one.digitalinnovation.gof.exception.ClienteNaoEncontradoException */
+	Cliente atualizar(Long id, String nome, String cep);
 
+	/** @throws one.digitalinnovation.gof.exception.ClienteNaoEncontradoException */
 	void deletar(Long id);
 
 }

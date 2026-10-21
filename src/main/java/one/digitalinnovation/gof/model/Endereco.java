@@ -1,20 +1,19 @@
 package one.digitalinnovation.gof.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
- * Os atributos desse modelo foram gerados automaticamente pelo site
- * jsonschema2pojo.org. Para isso, usamos o JSON de retorno da API do ViaCEP.
- * 
- * @see <a href="https://www.jsonschema2pojo.org">jsonschema2pojo.org</a>
+ * Endereço de um CEP. Fica salvo no banco e funciona como cache: o mesmo CEP
+ * não é consultado duas vezes nas APIs externas.
+ *
  * @see <a href="https://viacep.com.br">ViaCEP</a>
- * 
- * @author falvojr
+ * @see <a href="https://brasilapi.com.br">BrasilAPI</a>
  */
 @Entity
 public class Endereco {
 
+	/** Só os 8 dígitos, sem hífen. */
 	@Id
 	private String cep;
 	private String logradouro;
@@ -23,9 +22,9 @@ public class Endereco {
 	private String localidade;
 	private String uf;
 	private String ibge;
-	private String gia;
 	private String ddd;
-	private String siafi;
+	/** Qual serviço respondeu a consulta (ViaCEP ou BrasilAPI). */
+	private String fonte;
 
 	public String getCep() {
 		return cep;
@@ -83,14 +82,6 @@ public class Endereco {
 		this.ibge = ibge;
 	}
 
-	public String getGia() {
-		return gia;
-	}
-
-	public void setGia(String gia) {
-		this.gia = gia;
-	}
-
 	public String getDdd() {
 		return ddd;
 	}
@@ -99,12 +90,12 @@ public class Endereco {
 		this.ddd = ddd;
 	}
 
-	public String getSiafi() {
-		return siafi;
+	public String getFonte() {
+		return fonte;
 	}
 
-	public void setSiafi(String siafi) {
-		this.siafi = siafi;
+	public void setFonte(String fonte) {
+		this.fonte = fonte;
 	}
 
 }
